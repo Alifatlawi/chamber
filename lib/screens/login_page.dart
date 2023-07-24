@@ -128,9 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => Homepage()),
+                        (Route<dynamic> route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(

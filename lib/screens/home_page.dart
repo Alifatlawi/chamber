@@ -59,7 +59,7 @@ class Homepage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 55, left: 15, right: 20),
+              padding: const EdgeInsets.only(top: 60, left: 15, right: 20),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -122,6 +122,29 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: Container(
+        height: 50.0, // control the height of the button
+        width: 60.0, // control the width of the button
+        child: RawMaterialButton(
+          onPressed: () {
+            // Handle button press here
+          },
+          fillColor: Colors.blue,
+          padding: const EdgeInsets.all(10.0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            ),
+          ), // Change the color as needed
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 30, // Adjust icon size here
+          ),
         ),
       ),
     );

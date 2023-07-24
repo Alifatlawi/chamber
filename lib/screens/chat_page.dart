@@ -28,10 +28,21 @@ class ChatPage extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 30, left: 15, right: 20),
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05,
+                    left: MediaQuery.of(context).size.height * 0.025,
+                    right: 20,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      IconButton(
+                        color: Colors.white,
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                       const CircleAvatar(
                         maxRadius: 30,
                         // backgroundImage: AssetImage('asstes/images/twitter.png'),
@@ -80,6 +91,7 @@ class ChatPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(height: 50),
                 Expanded(
                   child: ListView.builder(
                     itemCount: chatMessages.length,
@@ -88,50 +100,76 @@ class ChatPage extends StatelessWidget {
                     },
                   ),
                 ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: BottomAppBar(
-                color: Colors.blue,
-                child: Padding(
-                  padding: EdgeInsets.all(2.0), // Reduced padding
+                Container(
+                  padding: const EdgeInsets.only(top: 10),
+                  decoration: const BoxDecoration(
+                    color: Colors.deepPurple,
+                  ),
                   child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.camera, size: 24.0), // Smaller icon
-                        onPressed: () {
-                          // Functionality to open camera
-                        },
-                      ),
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(fontSize: 12.0), // Smaller font size
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 5.0,
-                                horizontal: 10.0), // Reduced content padding
-                            fillColor: Colors.purple,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25)),
-                            hintText: 'Type a message',
+                    children: [
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 15, right: 2),
+                          child: SizedBox(
+                            height: 40,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30)),
+                                ),
+                                hintText: 'Enter message',
+                                suffixIcon: Icon(Icons.mic),
+                                filled: true,
+                                fillColor: Colors.blue,
+                                contentPadding:
+                                    EdgeInsets.all(5.0), // Add vertical padding
+                              ),
+                            ),
                           ),
-                          onSubmitted: (String value) {
-                            // Functionality when a message is submitted
-                          },
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.send, size: 24.0), // Smaller icon
-                        onPressed: () {
-                          // Functionality to send message
-                        },
-                      ),
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_upward)),
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.camera_alt)),
+                      const SizedBox(width: 4),
                     ],
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: 10,
+                  child: Container(color: Colors.deepPurple),
+                )
+              ],
             ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: SafeArea(
+            //     child: Container(
+            //       color: Colors.white,
+            //       padding: EdgeInsets.only(
+            //           bottom: MediaQuery.of(context).viewInsets.bottom),
+            //       child: Row(
+            //         children: [
+            //           Flexible(
+            //             child: TextField(
+            //               // controller: _textController,
+            //               // onSubmitted: _handleSubmitted,
+            //               decoration: InputDecoration.collapsed(
+            //                   hintText: "Type a message"),
+            //             ),
+            //           ),
+            //           IconButton(
+            //               icon:
+            //                   Icon(Icons.send, color: Colors.green, size: 30.0),
+            //               onPressed: () {}),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
