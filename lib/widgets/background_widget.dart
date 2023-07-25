@@ -31,6 +31,7 @@ class BackgroundWidget extends StatelessWidget {
           child: Text(
             overlayText,
             style: const TextStyle(
+              fontWeight: FontWeight.bold,
               fontSize: 20,
               color: Colors.white,
             ),

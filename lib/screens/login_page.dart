@@ -1,7 +1,9 @@
 import 'package:biligoba_chamber/screens/create_account_page.dart';
+import 'package:biligoba_chamber/screens/forgot_password_page.dart';
 import 'package:biligoba_chamber/screens/home_page.dart';
 import 'package:biligoba_chamber/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,17 +27,18 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.25),
               Row(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 50, right: 4),
-                      child: const MyCustomDropdown(),
+                  Container(
+                    margin: const EdgeInsets.only(left: 30),
+                    child: const CountryCodePicker(
+                      initialSelection: 'TR',
+                      flagWidth: 28,
+                      dialogBackgroundColor: Colors.white,
                     ),
                   ),
                   Expanded(
                     flex: 2,
                     child: Container(
-                      margin: const EdgeInsets.only(left: 4, right: 50),
+                      margin: const EdgeInsets.only(left: 0, right: 50),
                       child: const TextField(
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
@@ -109,7 +112,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const Spacer(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordScreen()));
+                      },
                       child: const Text(
                         'Forgot Password',
                         style: TextStyle(
@@ -223,46 +232,46 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class MyCustomDropdown extends StatefulWidget {
-  const MyCustomDropdown({Key? key}) : super(key: key);
+// class MyCustomDropdown extends StatefulWidget {
+//   const MyCustomDropdown({Key? key}) : super(key: key);
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _MyCustomDropdownState createState() => _MyCustomDropdownState();
-}
+//   @override
+//   // ignore: library_private_types_in_public_api
+//   _MyCustomDropdownState createState() => _MyCustomDropdownState();
+// }
 
-class _MyCustomDropdownState extends State<MyCustomDropdown> {
-  String? dropdownValue;
+// class _MyCustomDropdownState extends State<MyCustomDropdown> {
+//   String? dropdownValue;
 
-  @override
-  Widget build(BuildContext context) {
-    return InputDecorator(
-      decoration: const InputDecoration(
-        contentPadding: EdgeInsets.only(bottom: 0),
-        border: UnderlineInputBorder(),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: dropdownValue,
-          hint: const Text("Code", style: TextStyle(color: Colors.black)),
-          isExpanded: true,
-          items: <String>['Code 1', 'Code 2', 'Code 3', 'Code 4']
-              .map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue;
-            });
-          },
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return InputDecorator(
+//       decoration: const InputDecoration(
+//         contentPadding: EdgeInsets.only(bottom: 0),
+//         border: UnderlineInputBorder(),
+//         enabledBorder: UnderlineInputBorder(
+//           borderSide: BorderSide(color: Colors.black),
+//         ),
+//       ),
+//       child: DropdownButtonHideUnderline(
+//         child: DropdownButton<String>(
+//           value: dropdownValue,
+//           hint: const Text("Code", style: TextStyle(color: Colors.black)),
+//           isExpanded: true,
+//           items: <String>['Code 1', 'Code 2', 'Code 3', 'Code 4']
+//               .map((String value) {
+//             return DropdownMenuItem<String>(
+//               value: value,
+//               child: Text(value),
+//             );
+//           }).toList(),
+//           onChanged: (String? newValue) {
+//             setState(() {
+//               dropdownValue = newValue;
+//             });
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -66,9 +66,7 @@ class ChatPage extends StatelessWidget {
                         children: [
                           const Icon(Icons.camera_alt_rounded),
                           PopupMenuButton<String>(
-                            onSelected: (value) {
-                              print('You selected: $value');
-                            },
+                            onSelected: (value) {},
                             itemBuilder: (BuildContext context) {
                               return <PopupMenuEntry<String>>[
                                 const PopupMenuItem<String>(

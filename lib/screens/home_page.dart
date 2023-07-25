@@ -50,6 +50,36 @@ class Homepage extends StatelessWidget {
       imagePath: 'assets/images/chamber.png',
       isUser: true,
     ),
+    ChatMessage(
+      contactName: 'Contact 1',
+      message: 'Hello',
+      imagePath: 'assets/images/chamber.png',
+      isUser: true,
+    ),
+    ChatMessage(
+      contactName: 'Contact 1',
+      message: 'Hello',
+      imagePath: 'assets/images/chamber.png',
+      isUser: true,
+    ),
+    ChatMessage(
+      contactName: 'Contact 1',
+      message: 'Hello',
+      imagePath: 'assets/images/chamber.png',
+      isUser: true,
+    ),
+    ChatMessage(
+      contactName: 'Contact 1',
+      message: 'Hello',
+      imagePath: 'assets/images/chamber.png',
+      isUser: true,
+    ),
+    ChatMessage(
+      contactName: 'Contact 1',
+      message: 'Hello',
+      imagePath: 'assets/images/chamber.png',
+      isUser: true,
+    ),
   ];
 
   @override
@@ -83,8 +113,11 @@ class Homepage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 60),
             Expanded(
               child: ListView.builder(
+                padding: const EdgeInsets.only(top: 5.0),
+                physics: const ClampingScrollPhysics(),
                 itemCount: chatMessages.length,
                 itemBuilder: (context, index) {
                   return Column(
@@ -124,7 +157,7 @@ class Homepage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Container(
+      floatingActionButton: SizedBox(
         height: 50.0, // control the height of the button
         width: 60.0, // control the width of the button
         child: RawMaterialButton(
