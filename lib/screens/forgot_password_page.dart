@@ -76,10 +76,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.of(context).pushAndRemoveUntil(
-                      //   MaterialPageRoute(builder: (context) => Homepage()),
-                      //   (Route<dynamic> route) => false,
-                      // );
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => Homepage()),
+                        (Route<dynamic> route) => false,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,

@@ -24,7 +24,9 @@ class BackgroundWidget extends StatelessWidget {
             ),
           ),
         ),
-        Image.asset('assets/images/top.png'),
+        Image.asset(
+          'assets/images/top.png',
+        ),
         Positioned(
           top: MediaQuery.of(context).size.height * 0.1,
           left: 18,

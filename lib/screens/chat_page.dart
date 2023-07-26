@@ -1,7 +1,10 @@
-import 'package:biligoba_chamber/widgets/chatPage_widget.dart';
+// import 'package:biligoba_chamber/widgets/chatPage_widget.dart';
+import 'package:biligoba_chamber/widgets/testpage.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:biligoba_chamber/models/main_chat.dart';
 
+import '../widgets/camera_screen.dart';
 import '../widgets/chat_bubble.dart';
 
 class ChatPage extends StatelessWidget {
@@ -22,7 +25,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: ChatPageWidget(
+      body: TestPage(
         child: Stack(
           children: [
             Column(
@@ -30,7 +33,7 @@ class ChatPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.05,
-                    left: MediaQuery.of(context).size.height * 0.025,
+                    left: MediaQuery.of(context).size.height * 0.005,
                     right: 20,
                   ),
                   child: Row(
@@ -64,7 +67,20 @@ class ChatPage extends StatelessWidget {
                       const Spacer(),
                       Row(
                         children: [
-                          const Icon(Icons.camera_alt_rounded),
+                          IconButton(
+                              onPressed: () async {
+                                final cameras = await availableCameras();
+                                final camera = cameras.first;
+
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          CameraScreen(camera: camera)),
+                                );
+                              },
+                              icon: const Icon(Icons.camera_alt_rounded)),
                           PopupMenuButton<String>(
                             onSelected: (value) {},
                             itemBuilder: (BuildContext context) {

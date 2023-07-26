@@ -1,4 +1,5 @@
-import 'package:biligoba_chamber/widgets/second_background.dart';
+// import 'package:biligoba_chamber/widgets/second_background.dart';
+import 'package:biligoba_chamber/widgets/testpage.dart';
 import 'package:flutter/material.dart';
 
 import '../models/main_chat.dart';
@@ -85,7 +86,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SecondBackgraoundWidget(
+      body: TestPage(
         child: Column(
           children: [
             Container(
@@ -113,7 +114,7 @@ class Homepage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 45),
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.only(top: 5.0),
