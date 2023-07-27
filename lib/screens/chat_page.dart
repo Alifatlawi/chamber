@@ -155,7 +155,7 @@ class ChatPage extends StatelessWidget {
                 SizedBox(
                   height: 10,
                   child: Container(color: Colors.deepPurple),
-                )
+                ),
               ],
             ),
             // Align(

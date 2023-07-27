@@ -1,4 +1,5 @@
 // import 'package:biligoba_chamber/widgets/second_background.dart';
+import 'package:biligoba_chamber/screens/map_page.dart';
 import 'package:biligoba_chamber/widgets/testpage.dart';
 import 'package:flutter/material.dart';
 
@@ -91,23 +92,29 @@ class Homepage extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.only(top: 60, left: 15, right: 20),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.camera_alt,
                     size: 30,
                     color: Colors.white,
                   ),
-                  Text(
+                  const Text(
                     'CHATS',
                     style: TextStyle(color: Colors.white),
                   ),
-                  Text(
-                    'FEATURE1',
-                    style: TextStyle(color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MapScreen()));
+                    },
+                    child: const Text(
+                      'Map',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  Text(
+                  const Text(
                     'FEATURE2',
                     style: TextStyle(color: Colors.white),
                   ),
