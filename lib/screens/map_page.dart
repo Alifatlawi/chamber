@@ -12,9 +12,11 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _googleMapController = Completer();
-  CameraPosition? _cameraPosition;
+  CameraPosition _cameraPosition = CameraPosition(
+    target: LatLng(39.9084634, 32.7535803),
+    zoom: 15,
+  );
 
-  // List of circles to be displayed on the map
   List<Circle> _circles = [];
 
   @override
@@ -24,11 +26,6 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   _init() {
-    _cameraPosition = const CameraPosition(
-      target: LatLng(39.9084634, 32.7535803),
-      zoom: 15,
-    );
-
     // Adding circles to the map
     _circles.add(
       Circle(
@@ -55,7 +52,7 @@ class _MapScreenState extends State<MapScreen> {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.only(top: 70, left: 15, right: 20),
+          padding: const EdgeInsets.only(top: 60, left: 15, right: 20),
           child: const Text(
             'Map',
             style: TextStyle(
@@ -67,8 +64,45 @@ class _MapScreenState extends State<MapScreen> {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _getMap(),
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Stack(
+                  children: [
+                    _getMap(),
+                    Positioned(
+                      top: 10.0,
+                      right: 10.0,
+                      child: Column(
+                        children: [
+                          FloatingActionButton(
+                            onPressed: () => _zoomIn(),
+                            child: const Icon(Icons.zoom_in),
+                          ),
+                          const SizedBox(height: 10),
+                          FloatingActionButton(
+                            onPressed: () => _zoomOut(),
+                            child: const Icon(Icons.zoom_out),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(
@@ -80,12 +114,38 @@ class _MapScreenState extends State<MapScreen> {
 
   Widget _getMap() {
     return GoogleMap(
-      initialCameraPosition: _cameraPosition!,
+      initialCameraPosition: _cameraPosition,
       mapType: MapType.normal,
       circles: Set.from(_circles),
       onMapCreated: (controller) {
         _googleMapController.complete(controller);
       },
     );
+  }
+
+  Future<void> _zoomIn() async {
+    final GoogleMapController controller = await _googleMapController.future;
+    final currentZoomLevel = _cameraPosition.zoom;
+    if (currentZoomLevel < 20.0) {
+      // maximum zoom level is 21
+      _cameraPosition = CameraPosition(
+        target: _cameraPosition.target,
+        zoom: currentZoomLevel + 1,
+      );
+      controller.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+    }
+  }
+
+  Future<void> _zoomOut() async {
+    final GoogleMapController controller = await _googleMapController.future;
+    final currentZoomLevel = _cameraPosition.zoom;
+    if (currentZoomLevel > 1.0) {
+      // minimum zoom level is 0
+      _cameraPosition = CameraPosition(
+        target: _cameraPosition.target,
+        zoom: currentZoomLevel - 1,
+      );
+      controller.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+    }
   }
 }
