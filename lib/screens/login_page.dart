@@ -1,277 +1,138 @@
-import 'package:biligoba_chamber/screens/create_account_page.dart';
-import 'package:biligoba_chamber/screens/forgot_password_page.dart';
-import 'package:biligoba_chamber/screens/home_page.dart';
-import 'package:biligoba_chamber/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import '../widgets/background_widget.dart';
+import '../widgets/logo_signin.dart';
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  bool _isChecked = false;
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    final ScreenWidth = MediaQuery.of(context).size.width;
+    // ignore: non_constant_identifier_names
+    final ScreenHeight = MediaQuery.of(context).size.height;
+    bool isChecked = false;
     return Scaffold(
-      body: BackgroundWidget(
-        overlayText: 'Log in',
-        child: SingleChildScrollView(
+        body: Stack(
+      children: [
+        BackgroundWidget(screenWidth: ScreenWidth, screenHeight: ScreenHeight),
+        Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.25),
               Row(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 30),
-                    child: const CountryCodePicker(
-                      initialSelection: 'TR',
-                      flagWidth: 28,
-                      dialogBackgroundColor: Colors.white,
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 27.0),
+                      child: const DropdownButtonExample(),
                     ),
                   ),
+                  const SizedBox(width: 10),
                   Expanded(
-                    flex: 2,
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 0, right: 50),
-                      child: const TextField(
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(bottom: 0),
-                          border: UnderlineInputBorder(),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          hintText: 'Phone',
-                          hintStyle: TextStyle(color: Colors.black),
+                    flex: 4,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: "Phone",
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black, width: 1),
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 50, right: 50, top: 8),
-                child: const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'OR*',
-                    style: TextStyle(
-                        color: Color.fromARGB(143, 0, 0, 0), fontSize: 12),
+              const Text('OR*'),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: "E-Mail",
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 1),
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 50, right: 50),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(bottom: 0),
-                    border: UnderlineInputBorder(),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                    labelText: "Password",
+                    labelStyle: TextStyle(color: Colors.black),
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 1),
                     ),
-                    hintText: 'E-mail',
-                    hintStyle: TextStyle(color: Colors.black),
-                  ),
-                ),
+                    suffixIcon: Icon(Icons.remove_red_eye_outlined)),
               ),
-              const SizedBox(height: 50),
-              Container(
-                margin: const EdgeInsets.only(left: 50, right: 50),
-                child: const TextField(
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                      border: UnderlineInputBorder(),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.black),
-                      suffixIcon: Icon(Icons.visibility)),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 35, right: 50),
-                child: Row(
-                  children: [
-                    Checkbox(
-                        value: _isChecked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _isChecked = value!;
-                          });
-                        }),
-                    const Text(
-                      'Keep me logged in',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordScreen()));
-                      },
+              Row(
+                children: [
+                  Checkbox(value: isChecked, onChanged: null),
+                  const Text('Keep me logged in'),
+                  const Spacer(),
+                  TextButton(
+                      onPressed: () {},
                       child: const Text(
                         'Forgot Password',
                         style: TextStyle(
-                          fontSize: 10,
                           color: Colors.black,
                           decoration: TextDecoration.underline,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  width: 200,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => Homepage()),
-                        (Route<dynamic> route) => false,
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color(0xFF60646f),
-                    ),
-                    child: const Text(
-                      'Log In',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Don\'t you have an account?',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CreateAccountPage()),
-                      );
-                    },
-                    child: const Text('Create Account',
-                        style: TextStyle(fontSize: 10)),
-                  )
+                      ))
                 ],
-              ),
-              const Center(
-                child: Text(
-                  'Log in with',
-                  style: TextStyle(fontSize: 12, color: Colors.white),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(top: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/facebook.png',
-                          width: 30,
-                          height: 30,
-                        ),
-                        const Text(
-                          'Facebook',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/google.png',
-                          width: 30,
-                          height: 30,
-                        ),
-                        const Text(
-                          'Google',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/twitter.png',
-                          width: 30,
-                          height: 30,
-                        ),
-                        const Text(
-                          'Twitter',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
               )
             ],
           ),
         ),
-      ),
-    );
+        IconBackground(
+          screenHeight: ScreenHeight,
+          screenWidth: ScreenWidth,
+        )
+      ],
+    ));
   }
 }
 
-// class MyCustomDropdown extends StatefulWidget {
-//   const MyCustomDropdown({Key? key}) : super(key: key);
+const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
-//   @override
-//   // ignore: library_private_types_in_public_api
-//   _MyCustomDropdownState createState() => _MyCustomDropdownState();
-// }
+class DropdownButtonExample extends StatefulWidget {
+  const DropdownButtonExample({super.key});
 
-// class _MyCustomDropdownState extends State<MyCustomDropdown> {
-//   String? dropdownValue;
+  @override
+  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return InputDecorator(
-//       decoration: const InputDecoration(
-//         contentPadding: EdgeInsets.only(bottom: 0),
-//         border: UnderlineInputBorder(),
-//         enabledBorder: UnderlineInputBorder(
-//           borderSide: BorderSide(color: Colors.black),
-//         ),
-//       ),
-//       child: DropdownButtonHideUnderline(
-//         child: DropdownButton<String>(
-//           value: dropdownValue,
-//           hint: const Text("Code", style: TextStyle(color: Colors.black)),
-//           isExpanded: true,
-//           items: <String>['Code 1', 'Code 2', 'Code 3', 'Code 4']
-//               .map((String value) {
-//             return DropdownMenuItem<String>(
-//               value: value,
-//               child: Text(value),
-//             );
-//           }).toList(),
-//           onChanged: (String? newValue) {
-//             setState(() {
-//               dropdownValue = newValue;
-//             });
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _DropdownButtonExampleState extends State<DropdownButtonExample> {
+  String dropdownValue = list.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(
+        Icons.arrow_downward,
+        size: 17,
+      ),
+      elevation: 16,
+      style: const TextStyle(color: Colors.black),
+      underline: Container(
+        height: 2, // Define the thickness of the underline
+        color: Colors.grey, // Define the color of the underline
+      ),
+      onChanged: (String? value) {
+        // This is called when the user selects an item.
+        setState(() {
+          dropdownValue = value!;
+        });
+      },
+      items: list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: const Text('Code'),
+        );
+      }).toList(),
+    );
+  }
+}

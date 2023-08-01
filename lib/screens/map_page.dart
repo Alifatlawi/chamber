@@ -7,17 +7,18 @@ class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _googleMapController = Completer();
-  CameraPosition _cameraPosition = CameraPosition(
+  CameraPosition _cameraPosition = const CameraPosition(
     target: LatLng(39.9084634, 32.7535803),
     zoom: 15,
   );
 
-  List<Circle> _circles = [];
+  final List<Circle> _circles = [];
 
   @override
   void initState() {
@@ -29,8 +30,8 @@ class _MapScreenState extends State<MapScreen> {
     // Adding circles to the map
     _circles.add(
       Circle(
-        circleId: CircleId('circle_1'),
-        center: LatLng(39.9084634, 32.7535803),
+        circleId: const CircleId('circle_1'),
+        center: const LatLng(39.9084634, 32.7535803),
         radius: 500, // specify the radius of the circle in meters
         fillColor: Colors.blue.withOpacity(0.3),
         strokeWidth: 2,
@@ -105,9 +106,9 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
         ),
-        const SizedBox(
-          height: 400,
-        )
+        // const SizedBox(
+        //   height: 400,
+        // )
       ],
     );
   }
@@ -117,6 +118,7 @@ class _MapScreenState extends State<MapScreen> {
       initialCameraPosition: _cameraPosition,
       mapType: MapType.normal,
       circles: Set.from(_circles),
+      myLocationButtonEnabled: false,
       onMapCreated: (controller) {
         _googleMapController.complete(controller);
       },
