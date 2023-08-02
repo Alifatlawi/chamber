@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class BackgroundWidget extends StatelessWidget {
   // final Widget child;
   // final String overlayText;
-  final screenHeight;
-  final screenWidth;
-  const BackgroundWidget(
-      {Key? key, required this.screenHeight, required this.screenWidth})
-      : super(key: key);
+  // final screenHeight;
+  // final screenWidth;
+  const BackgroundWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/background_widget.dart';
-import '../widgets/loginPageForm.dart';
+// import '../widgets/loginPageForm.dart';
 import '../widgets/logo_signin.dart';
+import '../widgets/signup_form.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +18,12 @@ class LoginPage extends StatelessWidget {
         body: Stack(
       children: [
         const BackgroundWidget(),
-        LoginBody(
+        SignupBody(
           screenWidth: ScreenWidth,
-          scrrenHeight: ScreenHeight,
+          screenHeight: ScreenHeight,
         ),
         Positioned(
-          right: 40,
+          right: 30,
           bottom: ScreenHeight * 0.035,
           child: const Icon(Icons.language),
         ),
@@ -36,7 +37,7 @@ class LoginPage extends StatelessWidget {
             top: ScreenHeight * 0.065,
             left: 30,
             child: const Text(
-              'log in',
+              'create account',
               style: TextStyle(fontSize: 24, color: Colors.white),
             )),
       ],

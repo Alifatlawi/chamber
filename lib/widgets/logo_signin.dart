@@ -18,7 +18,7 @@ class IconBackground extends StatelessWidget {
     const rightImageHeight = 375.0;
     final rightWidgetWidth =
         ((rightImageWidth * widgetHeight) / rightImageHeight);
-    const middleImageWidth = 143.0;
+    // const middleImageWidth = 143.0;
     const middleImageHeight = 375.0;
     final middleWidgetWidth =
         (screenWidth - (leftWidgetWidth + rightWidgetWidth)) as double;
