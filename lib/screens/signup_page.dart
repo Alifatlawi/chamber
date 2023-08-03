@@ -1,9 +1,10 @@
+import 'package:biligoba_chamber/screens/test_page.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/background_widget.dart';
 // import '../widgets/loginPageForm.dart';
 import '../widgets/logo_signin.dart';
-import '../widgets/signup_form.dart';
+// import '../widgets/signup_form.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -18,12 +19,9 @@ class SignupPage extends StatelessWidget {
         body: Stack(
       children: [
         const BackgroundWidget(),
-        SignupBody(
-          screenWidth: ScreenWidth,
-          screenHeight: ScreenHeight,
-        ),
+        const TestT(),
         Positioned(
-          right: 30,
+          right: ScreenWidth * 0.06,
           bottom: ScreenHeight * 0.035,
           child: const Icon(Icons.language),
         ),
@@ -35,10 +33,11 @@ class SignupPage extends StatelessWidget {
         ),
         Positioned(
             top: ScreenHeight * 0.065,
-            left: 30,
-            child: const Text(
+            left: ScreenWidth * 0.065,
+            child: Text(
               'create account',
-              style: TextStyle(fontSize: 24, color: Colors.white),
+              style:
+                  TextStyle(fontSize: ScreenHeight * 0.03, color: Colors.white),
             )),
       ],
     ));
